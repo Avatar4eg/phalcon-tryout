@@ -1,0 +1,21 @@
+{
+  "name": "avatar4eg/phalcon-tryout",
+  "description": "Phalcon test",
+  "type": "website",
+  "license": "MIT",
+  "keywords": [
+    "phalcon"
+  ],
+  "homepage": "https://phalcon-tryout.beardnbirds.ru",
+  "support": {
+    "email": "avanmorozov@gmail.com",
+    "source": "https://github.com/Avatar4eg/phalcon-tryout",
+    "issues": "https://github.com/Avatar4eg/phalcon-tryout/issues"
+  },
+  "require": {
+    "php": "^5.6 || ^7.0"
+  },
+  "require-dev": {
+    "phalcon/devtools": "~3.1"
+  }
+}
