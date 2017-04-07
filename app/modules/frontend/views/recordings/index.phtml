@@ -1,0 +1,76 @@
+<?php /** @var \Phalcon\Mvc\View\Engine\Php $this */
+$sort_add = $sort_add_page = '';
+if ($this->view->sort_data !== null) {
+    $sort_data = 'sort=' . $this->view->sort_data;
+    $sort_add = '?' . $sort_data;
+    $sort_add_page = '&' . $sort_data;
+} ?>
+
+<div class="page-header">
+    <h1>Recordings:</h1>
+    <p><?= $this->tag->linkTo(['', 'Home']) ?></p>
+</div>
+
+<?php echo $this->getContent() ?>
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id <?php echo $this->tag->linkTo('recordings?sort=id', '&uarr;') . ' ' . $this->tag->linkTo('recordings?sort=-id', '&darr;'); ?></th>
+            <th>Time start <?php echo $this->tag->linkTo('recordings?sort=time_start', '&uarr;') . ' ' . $this->tag->linkTo('recordings?sort=-time_start', '&darr;'); ?></th>
+            <th>Time end <?php echo $this->tag->linkTo('recordings?sort=time_end', '&uarr;') . ' ' . $this->tag->linkTo('recordings?sort=-time_end', '&darr;'); ?></th>
+            <th>Url</th>
+            <th>Programs</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($page->items as $recording) {
+            /** @var \PhalconTryout\Models\Recordings $recording */?>
+            <tr>
+                <td><?php echo $recording->getId(); ?></td>
+                <td><?php echo $recording->getTimeStart(); ?></td>
+                <td><?php echo $recording->getTimeEnd(); ?></td>
+                <td><?php echo $this->tag->linkTo($recording->getPath(), $recording->getPath()); ?></td>
+                <td>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($recording->getPrograms() as $program) {
+                            /** @var \PhalconTryout\Models\Programs $program */ ?>
+                            <tr>
+                                <td><?php echo $program->getId(); ?></td>
+                                <td><?php echo $program->getTitle(); ?></td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-sm-1">
+        <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+            <?php echo $page->current, '/', $page->total_pages ?>
+        </p>
+    </div>
+    <div class="col-sm-11">
+        <nav>
+            <ul class="pagination">
+                <li><?php echo $this->tag->linkTo('recordings' . $sort_add, 'First'); ?></li>
+                <li><?php echo $this->tag->linkTo('recordings?page=' . $page->before . $sort_add_page, 'Previous'); ?></li>
+                <li><?php echo $this->tag->linkTo('recordings?page=' . $page->next . $sort_add_page, 'Next'); ?></li>
+                <li><?php echo $this->tag->linkTo('recordings?page=' . $page->last . $sort_add_page, 'Last'); ?></li>
+            </ul>
+        </nav>
+    </div>
+</div>
