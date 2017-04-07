@@ -10,7 +10,7 @@ http://yourserver.com/recordings
 ```
 Preview:  
 ![Imgur](https://i.imgur.com/y05JvPp.png)  
-1. CLI-app with infinite loop on selected stream:
+2. CLI-app with infinite loop on selected stream:
 ```bash
 php run -watch
 ```
